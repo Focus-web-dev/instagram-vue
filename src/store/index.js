@@ -1,14 +1,9 @@
-import { createStore } from 'vuex'
+import { createStore } from 'vuex';
+
+import PostsView from "./modules/PostsView";
 
 export default createStore({
-  state: {
-  },
-  getters: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
   modules: {
+    PostsView
   }
 })
