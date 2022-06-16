@@ -1,9 +1,9 @@
 import { createStore } from 'vuex';
 
-import PostsView from "./modules/PostsView";
+import UsersStore from "./modules/UsersStore";
 
 export default createStore({
   modules: {
-    PostsView
+    UsersStore
   }
 })

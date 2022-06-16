@@ -12,13 +12,22 @@
       <path d="M22 23h-6.001a1 1 0 0 1-1-1v-5.455a2.997 2.997 0 1 0-5.993 0V22a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V11.543a1.002 1.002 0 0 1 .31-.724l10-9.543a1.001 1.001 0 0 1 1.38 0l10 9.543a1.002 1.002 0 0 1 .31.724V22a1 1 0 0 1-1 1z"></path>
     </symbol>
 
-<!--    <symbol id="add-post-icon" viewBox="0 0 24 24" fill="currentColor">-->
-<!--      <path d="M2 12v3.45c0 2.849.698 4.005 1.606 4.944.94.909 2.098 1.608 4.946 1.608h6.896c2.848 0 4.006-.7 4.946-1.608C21.302 19.455 22 18.3 22 15.45V8.552c0-2.849-.698-4.006-1.606-4.945C19.454 2.7 18.296 2 15.448 2H8.552c-2.848 0-4.006.699-4.946 1.607C2.698 4.547 2 5.703 2 8.552zM6.545 12.001h10.91M12.003 6.545v10.91"></path>-->
-<!--    </symbol>-->
-    <symbol id="add-post-icon" color="currentColor" fill="currentColor" height="24" role="img" viewBox="0 0 24 24">
+    <symbol id="add-post-icon" color="currentColor" fill="currentColor" viewBox="0 0 24 24">
       <path d="M2 12v3.45c0 2.849.698 4.005 1.606 4.944.94.909 2.098 1.608 4.946 1.608h6.896c2.848 0 4.006-.7 4.946-1.608C21.302 19.455 22 18.3 22 15.45V8.552c0-2.849-.698-4.006-1.606-4.945C19.454 2.7 18.296 2 15.448 2H8.552c-2.848 0-4.006.699-4.946 1.607C2.698 4.547 2 5.703 2 8.552z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
       <line stroke="currentFill" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="6.545" x2="17.455" y1="12.001" y2="12.001"></line>
       <line stroke="currentFill" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="12.003" x2="12.003" y1="6.545" y2="17.455"></line>
+    </symbol>
+
+    <symbol id="like-icon" stroke="currentColor" stroke-width="4" fill="currentColor" viewBox="0 0 48 48">
+      <path d="M34.6 3.1c-4.5 0-7.9 1.8-10.6 5.6-2.7-3.7-6.1-5.5-10.6-5.5C6 3.1 0 9.6 0 17.6c0 7.3 5.4 12 10.6 16.5.6.5 1.3 1.1 1.9 1.7l2.3 2c4.4 3.9 6.6 5.9 7.6 6.5.5.3 1.1.5 1.6.5s1.1-.2 1.6-.5c1-.6 2.8-2.2 7.8-6.8l2-1.8c.7-.6 1.3-1.2 2-1.7C42.7 29.6 48 25 48 17.6c0-8-6-14.5-13.4-14.5z"></path>
+    </symbol>
+
+    <symbol id="comment-icon" stroke="#262626" stroke-width="4" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22z" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path>
+    </symbol>
+
+    <symbol id="save-icon" stroke="#262626" stroke-width="4" fill="currentColor" viewBox="0 0 24 24">
+      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m20 21-8-7.56L4 21V3h16v18z"></path>
     </symbol>
   </svg>
 </template>
