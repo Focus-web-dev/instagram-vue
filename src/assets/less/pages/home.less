@@ -1,5 +1,6 @@
 .home {
   width: 60%;
+  padding: 100px 0 40px;
 }
 
 .feed {
@@ -12,47 +13,74 @@
   flex-direction: column;
   overflow: hidden;
 
-  padding: 25px;
+  max-width: 100%;
+  min-height: 300px;
+
+  padding: 25px 0;
   border-radius: 10px;
-  border: 1px solid @blackLowOpacity;
+
+  -webkit-box-shadow: 0px 0px 25px -8px rgba(0,0,0,0.4);
+  -moz-box-shadow: 0px 0px 25px -8px rgba(0,0,0,0.4);
+  box-shadow: 0px 0px 25px -8px rgba(0,0,0,0.4);
+
+  &:hover,
+  &:focus {
+    .swiper-button-prev,
+    .swiper-button-next { opacity: 1 }
+  }
 
   &:not(:last-child) {
     margin-bottom: 35px;
   }
 
-  &__author {
+  &__header {
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
 
-    img {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      border: 1px solid @blackLowOpacity;
-      object-fit: cover;
-      margin-right: 20px;
+    padding: 0 25px;
 
-      transition: all .3s ease-in-out;
-    }
+    .author {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: fit-content;
 
-    p {
-      font-size: 16px;
-      font-weight: 700;
-      color: @black;
-
-      transition: all .3s ease-in-out;
-    }
-
-    &:hover,
-    &:focus {
       img {
-        transform: scale(1.2);
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: @blackLowOpacity;
+        object-fit: cover;
+        margin-right: 20px;
+
+        transition: all .3s ease-in-out;
       }
 
       p {
-        letter-spacing: 1px;
+        font-size: 20px;
+        font-weight: 500;
+        color: @black;
+
+        transition: all .3s ease-in-out;
       }
+
+      &:hover,
+      &:focus {
+        img {
+          border-radius: 10px;
+        }
+
+        p {
+          letter-spacing: 1px;
+        }
+      }
+    }
+
+    .date {
+      font-size: 14px;
+      font-weight: 300;
     }
   }
 
@@ -69,7 +97,6 @@
       display: flex;
 
       img {
-        border-radius: 10px;
         width: 100%;
         object-fit: contain;
       }
@@ -77,9 +104,11 @@
 
     .swiper-button-prev,
     .swiper-button-next {
+      opacity: 0;
+
       position: absolute;
       top: 50%;
-      right: calc(100% - 15px);
+      right: calc(100% - 45px);
 
       display: flex;
       justify-content: center;
@@ -110,7 +139,7 @@
 
     .swiper-button-next {
       right: unset;
-      left: calc(100% - 15px);
+      left: calc(100% - 45px);
 
       &::after {
         content: "❯";
@@ -150,57 +179,159 @@
         }
       }
     }
-
-    .bar {
-      position: absolute;
-      top: calc(100% + 15px);
-      left: 0;
-
-      &__item {
-
-        width: 24px;
-        height: 24px;
-
-        &:not(:last-child) {
-          margin-right: 15px;
-        }
-
-        svg {
-          color: @black;
-          fill-opacity: 0;
-
-          transition: all .3s ease-in-out;
-        }
-
-        &:hover,
-        &:focus {
-          svg {
-            fill-opacity: 1;
-          }
-
-          svg.like {
-            stroke: rgba(237, 73, 86, 0.1);
-            color: rgba(237, 73, 86, .8);
-          }
-        }
-
-        svg.like_active {
-          fill-opacity: 1;
-
-          stroke: rgba(237, 73, 86, 1);
-          color: rgba(237, 73, 86, 1);
-        }
-
-        svg.save_active {
-          fill-opacity: 1;
-
-          stroke: @black;
-          color: @black;
-        }
-      }
-    }
-
   }
 
   &__content_hidden-pagination .swiper-pagination { display: none; }
+
+  .bar {
+    padding: 0 25px;
+    transform: translateY(-30%);
+
+    &__item {
+      width: 24px;
+      height: 24px;
+
+      &:not(:last-child) {
+        margin-right: 15px;
+      }
+
+      svg {
+        color: @black;
+        fill-opacity: 0;
+
+        transition: all .3s ease-in-out;
+      }
+
+      &:hover,
+      &:focus {
+        svg {
+          fill-opacity: 1;
+        }
+
+        svg.like {
+          stroke: rgba(237, 73, 86, 0.1);
+          color: rgba(237, 73, 86, .8);
+        }
+      }
+
+      svg.like_active {
+        fill-opacity: 1;
+
+        stroke: rgba(237, 73, 86, 1);
+        color: rgba(237, 73, 86, 1);
+      }
+
+      svg.save_active {
+        fill-opacity: 1;
+
+        stroke: @black;
+        color: @black;
+      }
+    }
+  }
+
+  &__footer {
+    padding: 5px 25px 0;
+
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 24px;
+
+    .likes {
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .description {
+      a {
+        font-weight: 700;
+        color: @black;
+      }
+
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+
+    .view {
+      font-size: 14px;
+      font-weight: 900;
+      color: @hoverColor;
+      transition: all .3s ease-in-out;
+
+      &:hover,
+      &:focus {
+        color: @black;
+      }
+    }
+
+    .comments {
+      display: flex;
+      flex-direction: column;
+      margin-top: 10px;
+
+      &__item {
+        padding-bottom: 15px;
+        border-bottom: 1px solid @blackLowOpacity;
+
+        font-size: 14px;
+        font-weight: 300;
+        color: @black;
+
+        p {
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+
+          span {
+            font-weight: 500;
+          }
+        }
+
+        .likes {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+
+          margin-top: 10px;
+          margin-bottom: 0;
+
+          .like {
+            color: @black;
+            fill-opacity: 0;
+
+            width: 14px;
+            height: 12px;
+            margin-right: 5px;
+
+            transition: all .3s ease-in-out;
+
+            &_active {
+              fill-opacity: 1;
+
+              stroke: rgba(237, 73, 86, 1);
+              color: rgba(237, 73, 86, 1);
+            }
+          }
+
+          span {
+            line-height: 12px;
+            font-weight: 100;
+
+            transition: all .3s ease-in-out;
+          }
+
+          &:hover,
+          &:focus {
+            .like {
+              fill-opacity: 1;
+              stroke: rgba(237, 73, 86, 0.1);
+              color: rgba(237, 73, 86, .8);
+            }
+          }
+        }
+      }
+    }
+  }
 }

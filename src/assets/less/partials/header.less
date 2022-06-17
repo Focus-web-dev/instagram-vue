@@ -1,4 +1,9 @@
 .header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 15;
+
   display: flex;
   align-items: center;
 
@@ -6,7 +11,7 @@
   height: 60px;
 
   border-bottom: 1px solid @blackLowOpacity;
-  margin-bottom: 50px;
+  background: @white;
 
   &__logo svg {
     color: @black;
@@ -71,7 +76,7 @@
         height: 24px;
 
         border-radius: 50%;
-        border: 2px solid @black;
+        background: @blackLowOpacity;
 
         transition: all .3s ease-in-out;
       }

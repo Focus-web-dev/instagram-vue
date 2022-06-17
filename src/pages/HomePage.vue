@@ -2,13 +2,11 @@
   <div class="container">
     <section class="home">
       <div class="home__feed">
-
         <PostCard
             v-for="postData in getFeedData"
             :key="postData.post.id"
             :postData="postData"
         />
-
       </div>
     </section>
   </div>
@@ -17,7 +15,7 @@
 <script>
 import PostCard from "@/components/PostCard";
 
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'HomePage',
@@ -31,11 +29,19 @@ export default {
     PostCard,
   },
 
+  methods: {
+    ...mapActions( ['fetchProjects'] ),
+  },
+
   computed: {
     ...mapGetters( [
         'getAllUsers',
         'getFeedData'
     ] ),
+  },
+
+  mounted() {
+    this.fetchProjects();
   },
 
 }

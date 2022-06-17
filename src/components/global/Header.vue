@@ -4,7 +4,7 @@
       <div class="wrapper row">
 
         <router-link
-            to="/"
+            :to="'/profile/' + 'my'"
             class="header__logo col-4"
             aria-label="Go to homepage"
         >

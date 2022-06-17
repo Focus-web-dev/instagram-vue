@@ -1,17 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomePage from '@/pages/HomePage.vue'
-import ProfilePage from '@/pages/ProfilePage.vue'
 
 const routes = [
   {
     path: '/',
     name: 'HomePage',
-    component: HomePage
+    component: () => import('../pages/HomePage.vue'),
   },
   {
-    path: '/profile',
+    path: '/profile/:nickname',
     name: 'ProfilePage',
-    component: ProfilePage
+    params: { nickname: 'public' },
+    component: () => import('../pages/ProfilePage'),
   },
 ]
 
