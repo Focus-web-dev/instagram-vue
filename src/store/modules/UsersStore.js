@@ -40,7 +40,7 @@ export default {
                                 postId: 1001,
                                 postImages: ["https://picsum.photos/id/237/200/300", "https://picsum.photos/id/237/200/300", "https://picsum.photos/id/237/200/300"],
                                 postDescription: "DEF",
-                                postLikes: 2,
+                                postLikes: ['user_2', 'I_AM_USER'],
                                 postDate: "20/03",
                                 postComments: [
                                     {
@@ -56,7 +56,7 @@ export default {
                                 postId: 1002,
                                 postImages: ["https://picsum.photos/id/237/200/300", "https://picsum.photos/id/237/200/300", "https://picsum.photos/id/237/200/300"],
                                 postDescription: "DEF",
-                                postLikes: 2,
+                                postLikes: ['user_1'],
                                 postDate: "20/03",
                                 postComments: [
                                     {
@@ -72,7 +72,7 @@ export default {
                                 postId: 1003,
                                 postImages: ["https://picsum.photos/id/237/200/300", "https://picsum.photos/id/237/200/300", "https://picsum.photos/id/237/200/300"],
                                 postDescription: "DEF",
-                                postLikes: 2,
+                                postLikes: [],
                                 postDate: "20/03",
                                 postComments: [
                                     {
@@ -88,7 +88,7 @@ export default {
                                 postId: 1004,
                                 postImages: ["https://picsum.photos/id/237/200/300", "https://picsum.photos/id/237/200/300", "https://picsum.photos/id/237/200/300"],
                                 postDescription: "DEF",
-                                postLikes: 2,
+                                postLikes: [],
                                 postDate: "20/03",
                                 postComments: [
                                     {
@@ -104,7 +104,7 @@ export default {
                                 postId: 1005,
                                 postImages: ["https://picsum.photos/id/237/200/300", "https://picsum.photos/id/237/200/300", "https://picsum.photos/id/237/200/300"],
                                 postDescription: "DEF",
-                                postLikes: 2,
+                                postLikes: [],
                                 postDate: "20/03",
                                 postComments: [
                                     {
@@ -143,7 +143,7 @@ export default {
                             postId: 0,
                             postImages: ["https://picsum.photos/id/237/200/321"],
                             postDescription: "jsdoifasdfasdfadsf",
-                            postLikes: 1,
+                            postLikes: ['user_1', 'I_AM_USER'],
                             postDate: "20/03",
                             postComments: [
                                 {
@@ -171,6 +171,36 @@ export default {
 
         updateCurrentUser( state, currentUser ) {
             state.currentUser = currentUser;
+        },
+
+        postLike( state, postId ) {
+            let userIdx;
+            let postIdx;
+
+            state.users.forEach((el, userIndex) => {
+                let idx = el.posts.findIndex(postEl => {
+                    return postEl.postId === postId;
+                });
+
+                if (idx !== -1) {
+                    userIdx = userIndex;
+                    postIdx = idx;
+                }
+            })
+
+            console.log(state.users);
+            console.log(userIdx, postIdx);
+
+            if (state.users[userIdx].posts[postIdx].postLikes.findIndex(el => { return el === state.currentUser.nickname }) === -1) {
+                state.users[userIdx].posts[postIdx].postLikes.push(state.currentUser.nickname);
+            }
+            else {
+                state.users[userIdx].posts[postIdx].postLikes.splice(
+                    state.users[userIdx].posts[postIdx].postLikes.findIndex(el => { return el === state.currentUser.nickname }), 1
+                );
+            }
+
+            localStorage.users = JSON.stringify(state.users);
         }
     },
     state: {
@@ -191,8 +221,11 @@ export default {
                 })
             })
 
-            console.log(feedData);
             return feedData;
+        },
+
+        getCurrentUserData( state ) {
+            return state.currentUser;
         }
     }
 }

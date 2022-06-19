@@ -7,7 +7,7 @@
           <svg class="like" width="26" height="24" aria-hidden="true" role="img">
             <use xlink:href="#like-icon"></use>
           </svg>
-          <span>{{ postData.postLikes.toString() }}</span>
+          <span>{{ postData.postLikes.length.toString() }}</span>
         </div>
 
         <div class="post-info__item">

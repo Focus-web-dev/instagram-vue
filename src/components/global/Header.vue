@@ -43,7 +43,7 @@
               to="/profile/your-profile"
               class="avatar"
           >
-            <img src="https://sogyaalma.org.sa/wp-content/uploads/sites/276/2021/03/D4431B38-8268-4ACD-87AB-E14106C47E1F-768x800.png" alt="profile-photo">
+            <img :src="getCurrentUserData.avatar" alt="profile-photo">
           </router-link>
         </nav>
 
@@ -53,7 +53,15 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: "HeaderComponent",
+
+  computed: {
+    ...mapGetters( [
+      'getCurrentUserData'
+    ] ),
+  },
 }
 </script>

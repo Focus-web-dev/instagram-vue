@@ -35,7 +35,6 @@ export default {
 
   computed: {
     ...mapGetters( [
-        'getAllUsers',
         'getFeedData'
     ] ),
   },

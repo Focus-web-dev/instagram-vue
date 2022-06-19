@@ -29,8 +29,19 @@
     </swiper>
 
     <div class="bar">
-      <button class="bar__item" aria-label="Like post">
-        <svg class="like" width="26" height="24" aria-hidden="true" role="img">
+      <button
+          @click="postLike( postData.post.postId )"
+          class="bar__item"
+          aria-label="Like post"
+      >
+        <svg
+            :class="{ 'like_active' : check(postData.post) }"
+            class="like"
+            width="26"
+            height="24"
+            aria-hidden="true"
+            role="img"
+        >
           <use xlink:href="#like-icon"></use>
         </svg>
       </button>
@@ -49,7 +60,7 @@
     </div>
 
     <div class="post__footer">
-      <p class="likes">{{ postData.post.postLikes.toString() }} likes</p>
+      <p class="likes">{{ postData.post.postLikes.length.toString() }} likes</p>
 
       <p class="description">
         <router-link :to="'/profile/' + postData.author">{{ postData.author }}</router-link>
@@ -86,18 +97,35 @@
 import { Navigation, Pagination, Keyboard } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 
+import {mapGetters, mapMutations} from "vuex";
+
 export default {
   name: 'PostCard',
+
   components: {
     Swiper,
     SwiperSlide,
   },
+
   props: {
     postData: {
       type: Object,
       required: true
     },
   },
+
+  methods: {
+    ...mapMutations( ['postLike'] ),
+
+    check(post) {
+      return post.postLikes.findIndex(el => { return el === this.getCurrentUserData.nickname; }) !== -1;
+    }
+  },
+
+  computed: {
+    ...mapGetters( ['getCurrentUserData'] ),
+  },
+
   setup() {
     return {
       modules: [Navigation, Pagination, Keyboard]
