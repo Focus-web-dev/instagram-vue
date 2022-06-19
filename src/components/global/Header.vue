@@ -4,7 +4,7 @@
       <div class="wrapper row">
 
         <router-link
-            :to="'/profile/' + 'my'"
+            to="/"
             class="header__logo col-4"
             aria-label="Go to homepage"
         >
@@ -40,7 +40,7 @@
             </li>
           </ul>
           <router-link
-              to="/profile"
+              to="/profile/your-profile"
               class="avatar"
           >
             <img src="https://sogyaalma.org.sa/wp-content/uploads/sites/276/2021/03/D4431B38-8268-4ACD-87AB-E14106C47E1F-768x800.png" alt="profile-photo">

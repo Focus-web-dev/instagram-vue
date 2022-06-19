@@ -1,10 +1,10 @@
 <template>
   <div class="container">
     <section class="home">
-      <div class="home__feed">
+      <div class="feed">
         <PostCard
             v-for="postData in getFeedData"
-            :key="postData.post.id"
+            :key="postData.postId"
             :postData="postData"
         />
       </div>

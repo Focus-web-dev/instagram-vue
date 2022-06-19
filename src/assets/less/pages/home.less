@@ -246,6 +246,12 @@
       a {
         font-weight: 700;
         color: @black;
+        transition: all .3s ease-in-out;
+
+        &:hover,
+        &:focus {
+          color: @hoverColor;
+        }
       }
 
       white-space: nowrap;
@@ -279,13 +285,21 @@
         font-weight: 300;
         color: @black;
 
-        p {
+        a {
+          color: @black;
           white-space: nowrap;
           text-overflow: ellipsis;
           overflow: hidden;
 
+          transition: all .3s ease-in-out;
+
           span {
             font-weight: 500;
+          }
+
+          &:hover,
+          &:focus {
+            color: @hoverColor;
           }
         }
 
