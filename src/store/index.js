@@ -6,6 +6,6 @@ import ProfileStore from "./modules/ProfileStore";
 export default createStore({
   modules: {
     UsersStore,
-    ProfileStore
+    ProfileStore,
   }
 })

@@ -1,6 +1,6 @@
 export default {
     actions: {
-        fetchProjects(ctx) {
+        fetchData(ctx) {
             let users = [];
             let currentUser = {};
 
@@ -46,8 +46,15 @@ export default {
                                     {
                                         commentId: 2002,
                                         commentText: "Hey2!",
-                                        commentLikes: 0,
+                                        commentLikes: ['user_2', 'I_AM_USER'],
                                         commentAuthor: "user_1",
+                                        commentDate: "23/03"
+                                    },
+                                    {
+                                        commentId: 2007,
+                                        commentText: "Hey7!",
+                                        commentLikes: ['user_2', 'I_AM_USER'],
+                                        commentAuthor: "user_2",
                                         commentDate: "23/03"
                                     }
                                 ]
@@ -62,7 +69,7 @@ export default {
                                     {
                                         commentId: 2004,
                                         commentText: "Hey2!",
-                                        commentLikes: 0,
+                                        commentLikes: ['user_2', 'I_AM_USER'],
                                         commentAuthor: "user_1",
                                         commentDate: "23/03"
                                     }
@@ -78,7 +85,7 @@ export default {
                                     {
                                         commentId: 2005,
                                         commentText: "Hey2!",
-                                        commentLikes: 0,
+                                        commentLikes: ['I_AM_USER'],
                                         commentAuthor: "user_1",
                                         commentDate: "23/03"
                                     }
@@ -94,7 +101,7 @@ export default {
                                     {
                                         commentId: 2006,
                                         commentText: "Hey2!",
-                                        commentLikes: 0,
+                                        commentLikes: ['user_2', 'I_AM_USER'],
                                         commentAuthor: "user_1",
                                         commentDate: "23/03"
                                     }
@@ -110,7 +117,7 @@ export default {
                                     {
                                         commentId: 2003,
                                         commentText: "Hey2!",
-                                        commentLikes: 0,
+                                        commentLikes: ['user_2', 'I_AM_USER'],
                                         commentAuthor: "user_1",
                                         commentDate: "23/03"
                                     }
@@ -140,7 +147,7 @@ export default {
                     ],
                     posts: [
                         {
-                            postId: 0,
+                            postId: 1000,
                             postImages: ["https://picsum.photos/id/237/200/321"],
                             postDescription: "jsdoifasdfasdfadsf",
                             postLikes: ['user_1', 'I_AM_USER'],
@@ -149,13 +156,14 @@ export default {
                                 {
                                     commentId: 2001,
                                     commentText: "Hey!",
-                                    commentLikes: 0,
+                                    commentLikes: ['user_1', 'user_2'],
                                     commentAuthor: "user_2",
                                     commentDate: "21/03"
                                 }
                             ]
                         }
-                    ]
+                    ],
+                    savedPosts: [1001, 1003, 1005]
                 }
 
                 localStorage.currentUser = JSON.stringify(currentUser);
@@ -188,9 +196,6 @@ export default {
                 }
             })
 
-            console.log(state.users);
-            console.log(userIdx, postIdx);
-
             if (state.users[userIdx].posts[postIdx].postLikes.findIndex(el => { return el === state.currentUser.nickname }) === -1) {
                 state.users[userIdx].posts[postIdx].postLikes.push(state.currentUser.nickname);
             }
@@ -201,6 +206,35 @@ export default {
             }
 
             localStorage.users = JSON.stringify(state.users);
+        },
+
+        postSave( state, postId ) {
+            let savedPostIdx = state.currentUser.savedPosts.findIndex(el => {return el === postId});
+
+            if (savedPostIdx !== -1) {
+                state.currentUser.savedPosts.splice(savedPostIdx, 1);
+            } else state.currentUser.savedPosts.push(postId);
+
+            localStorage.currentUser = JSON.stringify(state.currentUser);
+        },
+
+        followUser( state, user ) {
+            let aimUser = state.users[state.users.findIndex(el => {return el.nickname === user})];
+
+            if (aimUser.followers.findIndex(el => { return el === state.currentUser.nickname }) === -1) {
+                aimUser.followers.push(state.currentUser.nickname);
+                state.currentUser.follows.push(user);
+            } else {
+                aimUser.followers.splice(
+                    aimUser.followers.findIndex(el => {return el === state.currentUser.nickname}), 1
+                )
+                state.currentUser.follows = state.currentUser.follows.filter(el => el !== user);
+            }
+
+            state.users[state.users.findIndex(el => {return el.nickname === user})] = aimUser;
+
+            localStorage.currentUser = JSON.stringify(state.currentUser);
+            localStorage.users = JSON.stringify(state.users);
         }
     },
     state: {
@@ -208,24 +242,50 @@ export default {
         currentUser: {}
     },
     getters: {
+        getUsersData( state ) {
+            return state.users;
+        },
+
         getFeedData( state ) {
             const feedData = [];
 
             state.users.forEach(el => {
-                el.posts.forEach(post => {
-                    feedData.push ( {
-                        author: el.nickname,
-                        avatar: el.avatar,
-                        post: post
-                    } )
-                })
+                if (state.currentUser.follows.findIndex(userEl => {return userEl === el.nickname}) !== -1) {
+                    el.posts.forEach(post => {
+                        feedData.push ( {
+                            author: el.nickname,
+                            avatar: el.avatar,
+                            post: post
+                        } )
+                    })
+                }
             })
 
             return feedData;
         },
 
+        getAllPosts( state ) {
+            const allPosts = [];
+
+            state.users.forEach(el => {
+              el.posts.forEach(post => {
+                  allPosts.push({
+                      author: el.nickname,
+                      authorAvatar: el.avatar,
+                      post: post
+                  });
+              })
+            })
+
+            return allPosts;
+        },
+
         getCurrentUserData( state ) {
             return state.currentUser;
+        },
+
+        getAllUsers( state ) {
+            return state.users;
         }
     }
 }

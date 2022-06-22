@@ -10,7 +10,13 @@ const routes = [
     path: '/profile/:nickname',
     name: 'ProfilePage',
     params: { nickname: 'public' },
-    component: () => import('../pages/ProfilePage'),
+    component: () => import('../pages/ProfilePage.vue'),
+  },
+  {
+    path: '/post/:nickname/:id',
+    name: 'PostPage',
+    params: { nickname: 'public', id: 'public' },
+    component: () => import('../pages/PostPage.vue'),
   },
 ]
 

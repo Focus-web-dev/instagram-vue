@@ -11,10 +11,13 @@
             <h3>{{ getUserData.nickname }}</h3>
 
             <button
-                v-if="this.$route.params.nickname !== 'your-profile'"
+                @click="followHandler()"
+                v-if="this.$route.params.nickname !== getCurrentUser.nickname"
                 class="follow"
+                :class="{ 'unfollow': !checkFollow() }"
             >
-              Follow
+              <span v-if="checkFollow()">Follow</span>
+              <span v-else>Unfollow</span>
             </button>
           </div>
 
@@ -43,21 +46,42 @@
       <div class="profile__content">
 
         <div class="navigation">
-          <button class="navigation__item navigation__item_active">
+          <button
+              @click="switchTab('Posts')"
+              :class="{ 'navigation__item_active' : currentTab === 'Posts' }"
+              class="navigation__item"
+          >
             Posts
           </button>
-          <button class="navigation__item">
+          <button
+              v-if="this.$route.params.nickname === getCurrentUser.nickname"
+              @click="switchTab('Saved posts')"
+              :class="{ 'navigation__item_active' : currentTab === 'Saved posts' }"
+              class="navigation__item"
+          >
             Saved posts
           </button>
         </div>
 
         <div
-            v-if="postsCount"
+            v-if="(postsCount) && (currentTab === 'Posts')"
             class="preview-posts"
         >
 
           <PreviewPostCard
               v-for="postData in getUserData.posts"
+              :key="postData.postId"
+              :postData="postData"
+          />
+        </div>
+
+        <div
+            v-else-if="currentTab === 'Saved posts'"
+            class="preview-posts"
+        >
+
+          <PreviewPostCard
+              v-for="postData in getSavedPosts"
               :key="postData.postId"
               :postData="postData"
           />
@@ -72,7 +96,7 @@
 
 <script>
 
-import { mapActions, mapGetters } from 'vuex';
+import {mapActions, mapGetters, mapMutations} from 'vuex';
 import PreviewPostCard from '../components/PreviewPostCard';
 
 export default {
@@ -87,6 +111,10 @@ export default {
       postsCount: 0,
       followersCount: 0,
       followingCount: 0,
+
+      followers: [],
+
+      currentTab: 'Posts',
     }
   },
 
@@ -94,26 +122,45 @@ export default {
     $route(to) {
       if (to.name === 'ProfilePage') this.fetchUserData( to.params.nickname );
     },
-    getUserData() {
-      console.log(this.getUserData);
-      this.postsCount = this.getUserData.posts.length;
-      this.followersCount = this.getUserData.followers.length;
-      this.followingCount = this.getUserData.follows.length;
-    }
+
+    getUserData: function() { this.updateData(); }
   },
 
   methods: {
     ...mapActions( ['fetchUserData'] ),
+    ...mapMutations( ['updateUserData', 'profileFollow'] ),
+
+    switchTab( tab ) {
+      this.currentTab = tab;
+    },
+
+    updateData() {
+      this.postsCount = this.getUserData.posts.length;
+      this.followersCount = this.getUserData.followers.length;
+      this.followingCount = this.getUserData.follows.length;
+
+      this.followers = this.getUserData.followers;
+    },
+
+    followHandler() {
+      this.profileFollow( this.getCurrentUser.nickname );
+      this.updateData();
+    },
+
+    checkFollow() {
+      return this.followers.findIndex(el => {
+        return el === this.getCurrentUser.nickname
+      }) === -1;
+    }
   },
 
   computed: {
-    ...mapGetters( ['getUserData'] ),
+    ...mapGetters( ['getUserData', 'getCurrentUser', 'getSavedPosts'] ),
   },
 
 
   mounted() {
     this.fetchUserData( this.$route.params.nickname );
-
   },
 }
 

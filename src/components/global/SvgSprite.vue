@@ -29,6 +29,10 @@
     <symbol id="save-icon" stroke="#262626" stroke-width="4" fill="currentColor" viewBox="0 0 24 24">
       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m20 21-8-7.56L4 21V3h16v18z"></path>
     </symbol>
+
+    <symbol id="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="fill:currentColor">
+      <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"></path>
+    </symbol>
   </svg>
 </template>
 

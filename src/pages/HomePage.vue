@@ -1,13 +1,53 @@
 <template>
   <div class="container">
     <section class="home">
-      <div class="feed">
-        <PostCard
-            v-for="postData in getFeedData"
-            :key="postData.postId"
-            :postData="postData"
-        />
-      </div>
+      <aside class="home__left">
+        <div v-if="getFeedData.length" class="feed">
+          <PostCard
+              v-for="postData in getFeedData"
+              :key="postData.postId"
+              :postData="postData"
+          />
+        </div>
+        <h2 class="empty-feed" v-else>It's nothing to show. Try to follow someone</h2>
+      </aside>
+      <aside class="home__right">
+        <div class="suggestions">
+          <router-link :to="`/profile/${getCurrentUserData.nickname}`" class="profile-link">
+            <div class="profile-link__info">
+              <img :src="getCurrentUserData.avatar" alt="user-avatar">
+              <p>{{ getCurrentUserData.nickname }}</p>
+            </div>
+            <button>
+              <svg width="24" height="24" aria-hidden="true" role="img">
+                <use xlink:href="#arrow-icon"></use>
+              </svg>
+            </button>
+          </router-link>
+
+          <div class="suggestions__users">
+            <div
+                v-for="user in getUsersData"
+                :key="user.id"
+                class="user"
+            >
+              <router-link :to="`/profile/${user.nickname}`" class="user__info">
+                <img :src="user.avatar" alt="user-avatar">
+                <p>{{ user.nickname }}</p>
+              </router-link>
+
+              <button
+                  @click="followHandler(user.nickname)"
+                  :class="{'unfollow' : !checkFollow(user.nickname)}"
+                  class="follow"
+              >
+                <span v-if="checkFollow(user.nickname)">Follow</span>
+                <span v-else>Unfollow</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </aside>
     </section>
   </div>
 </template>
@@ -15,32 +55,40 @@
 <script>
 import PostCard from "@/components/PostCard";
 
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapActions, mapMutations } from 'vuex';
 
 export default {
   name: 'HomePage',
-  data() {
-    return {
-      images: ["https://picsum.photos/id/237/200/300", "https://picsum.photos/id/239/200/300", "https://picsum.photos/id/238/200/300"]
-    }
-  },
 
   components: {
     PostCard,
   },
 
   methods: {
-    ...mapActions( ['fetchProjects'] ),
+    ...mapActions( ['fetchData'] ),
+    ...mapMutations( ['followUser'] ),
+
+    checkFollow( user ) {
+      return this.getCurrentUserData.follows.findIndex(el => {
+        return el === user
+      }) === -1;
+    },
+
+    followHandler( user ) {
+      this.followUser( user );
+    },
   },
 
   computed: {
     ...mapGetters( [
-        'getFeedData'
+        'getFeedData',
+        'getCurrentUserData',
+        'getUsersData'
     ] ),
   },
 
   mounted() {
-    this.fetchProjects();
+    this.fetchData();
   },
 
 }

@@ -40,10 +40,10 @@
             </li>
           </ul>
           <router-link
-              to="/profile/your-profile"
+              :to="'/profile/' + currentUserData.nickname"
               class="avatar"
           >
-            <img :src="getCurrentUserData.avatar" alt="profile-photo">
+            <img :src="currentUserData.avatar" alt="profile-photo">
           </router-link>
         </nav>
 
@@ -53,15 +53,25 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import {mapGetters} from "vuex";
 
 export default {
   name: "HeaderComponent",
 
+  data() {
+    return {
+      currentUserData: localStorage.currentUser ? JSON.parse(localStorage.currentUser) : "xxx",
+    }
+  },
+
+  watch: {
+    getCurrentUserData() {
+      this.currentUserData = this.getCurrentUserData;
+    }
+  },
+
   computed: {
-    ...mapGetters( [
-      'getCurrentUserData'
-    ] ),
+    ...mapGetters( ['getCurrentUserData'] ),
   },
 }
 </script>

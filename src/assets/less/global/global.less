@@ -6,6 +6,7 @@
 body {
   font-family: 'Roboto', sans-serif;
   min-width: 360px;
+  height: unset;
 }
 
 .visually-hidden {
@@ -21,8 +22,28 @@ body {
   overflow: hidden;
 }
 
-.link {
+.follow {
+  background: #0095f6;
+  color: @white;
+  min-height: 45px;
 
+  &:hover {
+    background: #007ac9;
+  }
+  transition: all .3s ease-in-out;
+}
+
+.unfollow {
+  background: @white;
+  border: 1px solid @black;
+  color: @black;
+
+  &:hover {
+    color: @white;
+    border-color: #007ac9;
+    background: #007ac9;
+    opacity: .5;
+  }
 }
 
 h1 {
@@ -71,5 +92,51 @@ h1 {
       background-color: @orange;
     }
 
+  }
+}
+
+.profile-link {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  padding-bottom: 25px;
+  border-bottom: 1px solid @blackLowOpacity;
+
+  button {
+    transition: all .3s ease-in-out;
+  }
+
+  &:hover,
+  &:focus {
+    button {
+      transform: translateX(5px);
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    img {
+      width: 35px;
+      height: 35px;
+
+      background: @blackLowOpacity;
+      border-radius: 50%;
+      object-fit: cover;
+
+      margin-right: 10px;
+      transition: all .3s ease-in-out;
+    }
+
+    p {
+      font-size: 18px;
+      font-weight: 500;
+      color: #262626;
+      transition: all 0.3s ease-in-out;
+    }
   }
 }

@@ -10,8 +10,8 @@
       <p class="date">{{ postData.post.postDate }}</p>
     </div>
 
-    <swiper class="post__content"
-        :class="{'post__content_hidden-pagination': postData.post.postImages.length < 2}"
+    <swiper class="swiper"
+        :class="{'swiper_hidden-pagination': postData.post.postImages.length < 2}"
 
         :modules="modules"
         :slides-per-view="1"
@@ -35,7 +35,7 @@
           aria-label="Like post"
       >
         <svg
-            :class="{ 'like_active' : check(postData.post) }"
+            :class="{ 'like_active' : likeCheck(postData.post) }"
             class="like"
             width="26"
             height="24"
@@ -46,14 +46,28 @@
         </svg>
       </button>
 
-      <button class="bar__item" aria-label="Comment post">
+      <router-link
+          :to="`/post/${postData.author}/${postData.post.postId}`"
+          class="bar__item"
+          aria-label="Comment post"
+      >
         <svg width="24" height="24" aria-hidden="true" role="img">
           <use xlink:href="#comment-icon"></use>
         </svg>
-      </button>
+      </router-link>
 
-      <button class="bar__item" aria-label="Comment post">
-        <svg width="24" height="24" aria-hidden="true" role="img">
+      <button
+          @click="postSave(postData.post.postId)"
+          class="bar__item"
+          aria-label="Comment post"
+      >
+        <svg
+            :class="{ 'save_active' : saveCheck(postData.post.postId) }"
+            width="24"
+            height="24"
+            aria-hidden="true"
+            role="img"
+        >
           <use xlink:href="#save-icon"></use>
         </svg>
       </button>
@@ -67,7 +81,12 @@
         {{ postData.post.postDescription }}
       </p>
 
-      <a class="view" href="#">View {{ postData.post.postComments.length.toString() }} comment(s)</a>
+      <router-link
+          class="view"
+          :to="`/post/${postData.author}/${postData.post.postId}`"
+      >
+        View {{ postData.post.postComments.length.toString() }} comment(s)
+      </router-link>
 
       <div class="comments">
         <div
@@ -83,7 +102,7 @@
               <svg class="like" width="14" height="12" aria-hidden="true" role="img">
                 <use xlink:href="#like-icon"></use>
               </svg>
-              <span>{{ comment.commentLikes.toString() }} likes</span>
+              <span>{{ comment.commentLikes.length.toString() }} likes</span>
             </button>
           </div>
         </div>
@@ -115,10 +134,14 @@ export default {
   },
 
   methods: {
-    ...mapMutations( ['postLike'] ),
+    ...mapMutations( ['postLike', 'postSave'] ),
 
-    check(post) {
+    likeCheck(post) {
       return post.postLikes.findIndex(el => { return el === this.getCurrentUserData.nickname; }) !== -1;
+    },
+
+    saveCheck(postId) {
+      return this.getCurrentUserData.savedPosts.findIndex(el => { return el === postId }) !== -1;
     }
   },
 
