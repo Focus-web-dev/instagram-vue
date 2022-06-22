@@ -1,0 +1,157 @@
+.post {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  max-width: 100%;
+  min-height: 300px;
+
+  padding: 25px 0;
+  border-radius: 10px;
+
+  -webkit-box-shadow: 0px 0px 25px -8px rgba(0,0,0,0.4);
+  -moz-box-shadow: 0px 0px 25px -8px rgba(0,0,0,0.4);
+  box-shadow: 0px 0px 25px -8px rgba(0,0,0,0.4);
+
+  &:hover,
+  &:focus {
+    .swiper {
+      .swiper-button-prev,
+      .swiper-button-next { opacity: 1 }
+    }
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 35px;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 25px;
+
+    .author {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: fit-content;
+
+      img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: @blackLowOpacity;
+        object-fit: cover;
+        margin-right: 20px;
+
+        transition: all .3s ease-in-out;
+      }
+
+      p {
+        font-size: 20px;
+        font-weight: 500;
+        color: @black;
+
+        transition: all .3s ease-in-out;
+      }
+
+      &:hover,
+      &:focus {
+        img {
+          border-radius: 10px;
+        }
+
+        p {
+          letter-spacing: 1px;
+        }
+      }
+    }
+
+    .date {
+      font-size: 14px;
+      font-weight: 300;
+    }
+  }
+
+  &__footer {
+    padding: 5px 25px 0;
+
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 24px;
+
+    .likes {
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .description {
+      a {
+        font-weight: 700;
+        color: @black;
+        transition: all .3s ease-in-out;
+
+        &:hover,
+        &:focus {
+          color: @hoverColor;
+        }
+      }
+
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+
+    .view {
+      font-size: 14px;
+      font-weight: 900;
+      color: @hoverColor;
+      transition: all .3s ease-in-out;
+
+      &:hover,
+      &:focus {
+        color: @black;
+      }
+    }
+
+    .comments {
+      display: flex;
+      flex-direction: column;
+      margin-top: 10px;
+      margin-bottom: 0;
+      padding: 0;
+
+      &__item {
+        font-size: 14px;
+        font-weight: 300;
+        color: @black;
+
+        &:not(:first-child) {
+          margin-top: 15px;
+        }
+
+        a {
+          color: @black;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+
+          transition: all .3s ease-in-out;
+
+          span {
+            font-weight: 500;
+          }
+
+          &:hover,
+          &:focus {
+            color: @hoverColor;
+          }
+        }
+      }
+    }
+  }
+}

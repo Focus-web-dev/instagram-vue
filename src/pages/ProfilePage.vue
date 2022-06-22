@@ -1,15 +1,14 @@
 <template>
-
   <div class="container">
     <section class="profile">
       <div class="profile__header">
-
-        <img :src="getUserData.avatar" alt="User avatar">
-
+        <img
+            :src="getUserData.avatar"
+            alt="User avatar"
+        >
         <div class="data">
           <div class="data__nickname">
             <h3>{{ getUserData.nickname }}</h3>
-
             <button
                 @click="followHandler()"
                 v-if="this.$route.params.nickname !== getCurrentUser.nickname"
@@ -40,11 +39,9 @@
             <p>{{ getUserData.description }}</p>
           </div>
         </div>
-        
       </div>
 
       <div class="profile__content">
-
         <div class="navigation">
           <button
               @click="switchTab('Posts')"
@@ -56,8 +53,8 @@
           <button
               v-if="this.$route.params.nickname === getCurrentUser.nickname"
               @click="switchTab('Saved posts')"
-              :class="{ 'navigation__item_active' : currentTab === 'Saved posts' }"
               class="navigation__item"
+              :class="{ 'navigation__item_active' : currentTab === 'Saved posts' }"
           >
             Saved posts
           </button>
@@ -67,11 +64,11 @@
             v-if="(postsCount) && (currentTab === 'Posts')"
             class="preview-posts"
         >
-
           <PreviewPostCard
               v-for="postData in getUserData.posts"
               :key="postData.postId"
               :postData="postData"
+              :postAuthor="getUserData.nickname"
           />
         </div>
 
@@ -79,11 +76,11 @@
             v-else-if="currentTab === 'Saved posts'"
             class="preview-posts"
         >
-
           <PreviewPostCard
               v-for="postData in getSavedPosts"
               :key="postData.postId"
               :postData="postData"
+              :postAuthor="postData.postAuthor"
           />
         </div>
 

@@ -1,7 +1,12 @@
 <template>
   <div class="preview-post">
-    <a href="#">
-      <img :src="postData.postImages[0]" alt="Post image">
+    <router-link
+        :to="`/post/${postAuthor}/${postData.postId}`"
+    >
+      <img
+          :src="postData.postImages[0]"
+          alt="Post image"
+      >
       <div class="post-info">
         <div class="post-info__item">
           <svg class="like" width="26" height="24" aria-hidden="true" role="img">
@@ -17,7 +22,7 @@
           <span>{{ postData.postComments.length.toString() }}</span>
         </div>
       </div>
-    </a>
+    </router-link>
   </div>
 </template>
 
@@ -29,6 +34,10 @@ export default {
       type: Object,
       required: true
     },
+    postAuthor: {
+      type: String,
+      required: true
+    }
   },
 }
 </script>

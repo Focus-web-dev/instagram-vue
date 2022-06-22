@@ -1,0 +1,45 @@
+.bar {
+  padding: 0 25px;
+  transform: translateY(-30%);
+
+  &__item {
+    width: 24px;
+    height: 24px;
+
+    &:not(:last-child) {
+      margin-right: 15px;
+    }
+
+    svg {
+      color: @black;
+      fill-opacity: 0;
+
+      transition: all .3s ease-in-out;
+    }
+
+    &:hover {
+      svg {
+        fill-opacity: 1;
+      }
+
+      svg.like {
+        stroke: rgba(237, 73, 86, 0.1);
+        color: rgba(237, 73, 86, .8);
+      }
+    }
+
+    svg.like_active {
+      fill-opacity: 1;
+
+      stroke: rgba(237, 73, 86, 1);
+      color: rgba(237, 73, 86, 1);
+    }
+
+    svg.save_active {
+      fill-opacity: 1;
+
+      stroke: @black;
+      color: @black;
+    }
+  }
+}

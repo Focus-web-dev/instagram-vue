@@ -68,6 +68,7 @@ export default {
                 el.posts.forEach(post => {
                     if (state.currentUserData.savedPosts.findIndex(savedPost => {return savedPost === post.postId}) !== -1) {
                         savedPosts.push({
+                            postAuthor: el.nickname,
                             postId: post.postId,
                             postImages: post.postImages,
                             postLikes: post.postLikes,

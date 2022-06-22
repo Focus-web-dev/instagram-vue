@@ -101,8 +101,9 @@
             v-for="(comment, index) in postData.post.postComments"
             :key="comment.commentId"
             class="comments__item"
+            :class="{'deleteDOM' : index >= 3}"
         >
-          <div v-if="index < 3">
+          <div>
             <router-link :to="'/profile/' + comment.commentAuthor">
               <span>{{ comment.commentAuthor }}:</span> {{ comment.commentText }}
             </router-link>
@@ -135,15 +136,12 @@
 import { Navigation, Pagination, Keyboard } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 
-import {mapGetters, mapMutations} from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
   name: 'PostCard',
 
-  components: {
-    Swiper,
-    SwiperSlide,
-  },
+  components: { Swiper, SwiperSlide },
 
   props: {
     postData: {
@@ -187,7 +185,11 @@ export default {
 
   setup() {
     return {
-      modules: [Navigation, Pagination, Keyboard]
+      modules: [
+        Navigation,
+        Pagination,
+        Keyboard
+      ]
     }
   }
 }

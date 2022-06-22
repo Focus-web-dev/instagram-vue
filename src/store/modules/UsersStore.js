@@ -5,6 +5,47 @@ export default {
             let currentUser = {};
 
             //database imitate
+            if (localStorage.currentUser) currentUser = JSON.parse(localStorage.currentUser);
+            else {
+                currentUser = {
+                    id: 0,
+                    nickname: "I_AM_USER",
+                    avatar: "https://picsum.photos/id/237/200/320",
+                    name: "Cur name",
+                    description: "Current user",
+                    follows: [
+                        'user_1', 'user_2'
+                    ],
+                    followers: [
+                        'user_1', 'user_2'
+                    ],
+                    posts: [
+                        {
+                            postId: 1000,
+                            postImages: ["https://picsum.photos/id/237/200/321"],
+                            postDescription: "jsdoifasdfasdfadsf",
+                            postLikes: ['user_1', 'I_AM_USER'],
+                            postDate: "20/03",
+                            postComments: [
+                                {
+                                    commentId: 2001,
+                                    commentText: "Hey!",
+                                    commentLikes: ['user_1', 'user_2'],
+                                    commentAuthor: "user_2",
+                                    commentDate: "21/03"
+                                }
+                            ]
+                        }
+                    ],
+                    savedPosts: [1001, 1003, 1005]
+                }
+
+                localStorage.currentUser = JSON.stringify(currentUser);
+            }
+
+            ctx.commit('updateCurrentUser', currentUser);
+
+            //still database imitating :)
             if (localStorage.users) users = JSON.parse(localStorage.users);
             else {
                 users = [
@@ -127,60 +168,21 @@ export default {
                         ]
                     },
                 ]
+                users.push(currentUser);
                 localStorage.users = JSON.stringify(users);
             }
 
             ctx.commit('updateUsers', users);
 
-            //still database imitating :)
-            if (localStorage.currentUser) currentUser = JSON.parse(localStorage.currentUser);
-            else {
-                currentUser = {
-                    id: 0,
-                    nickname: "I_AM_USER",
-                    avatar: "https://picsum.photos/id/237/200/320",
-                    name: "Cur name",
-                    description: "Current user",
-                    follows: [
-                        'user_1', 'user_2'
-                    ],
-                    followers: [
-                        'user_1', 'user_2'
-                    ],
-                    posts: [
-                        {
-                            postId: 1000,
-                            postImages: ["https://picsum.photos/id/237/200/321"],
-                            postDescription: "jsdoifasdfasdfadsf",
-                            postLikes: ['user_1', 'I_AM_USER'],
-                            postDate: "20/03",
-                            postComments: [
-                                {
-                                    commentId: 2001,
-                                    commentText: "Hey!",
-                                    commentLikes: ['user_1', 'user_2'],
-                                    commentAuthor: "user_2",
-                                    commentDate: "21/03"
-                                }
-                            ]
-                        }
-                    ],
-                    savedPosts: [1001, 1003, 1005]
-                }
-
-                localStorage.currentUser = JSON.stringify(currentUser);
-            }
-
-            ctx.commit('updateCurrentUser', currentUser);
         },
     },
     mutations: {
-        updateUsers( state, users ) {
-            state.users = users;
-        },
-
         updateCurrentUser( state, currentUser ) {
             state.currentUser = currentUser;
+        },
+
+        updateUsers( state, users ) {
+            state.users = users;
         },
 
         postLike( state, postId ) {

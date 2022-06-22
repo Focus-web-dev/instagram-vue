@@ -38,6 +38,7 @@
                 v-for="user in getUsersData"
                 :key="user.id"
                 class="user"
+                :class="{'deleteDOM' : user.nickname === getCurrentUserData.nickname}"
             >
               <router-link
                   :to="`/profile/${user.nickname}`"

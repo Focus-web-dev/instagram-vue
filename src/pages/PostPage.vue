@@ -171,7 +171,6 @@ export default {
   watch: {
     getAllPosts: function() {
       this.postData = this.getAllPosts[this.getAllPosts.findIndex(el => {return el.post.postId === Number(this.$route.params.id)})]
-      console.log(this.postData);
     }
   },
 
@@ -182,7 +181,12 @@ export default {
 
   methods: {
     ...mapActions( ['fetchData'] ),
-    ...mapMutations( ['postLike', 'postSave', 'commentLike', 'addNewComment'] ),
+    ...mapMutations( [
+      'postLike',
+      'postSave',
+      'commentLike',
+      'addNewComment'
+    ] ),
 
     likeCheck( postData ) {
       return postData.postLikes.findIndex(el => { return el === this.getCurrentUserData.nickname; }) !== -1;
@@ -226,12 +230,20 @@ export default {
   },
 
   computed: {
-    ...mapGetters( ['getUsersData', 'getAllPosts', 'getCurrentUserData'] )
+    ...mapGetters( [
+      'getUsersData',
+      'getAllPosts',
+      'getCurrentUserData'
+    ] )
   },
 
   setup() {
     return {
-      modules: [Navigation, Pagination, Keyboard]
+      modules: [
+        Navigation,
+        Pagination,
+        Keyboard
+      ]
     }
   },
 
