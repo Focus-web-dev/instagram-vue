@@ -104,13 +104,14 @@ h1 {
   padding-bottom: 25px;
   border-bottom: 1px solid @blackLowOpacity;
 
-  button {
+  svg {
+    color: @black;
     transition: all .3s ease-in-out;
   }
 
   &:hover,
   &:focus {
-    button {
+    svg {
       transform: translateX(5px);
     }
   }
@@ -137,6 +138,48 @@ h1 {
       font-weight: 500;
       color: #262626;
       transition: all 0.3s ease-in-out;
+    }
+  }
+}
+
+.likes {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  margin-top: 10px;
+  margin-bottom: 0;
+
+  .like {
+    color: @black;
+    fill-opacity: 0;
+
+    width: 14px;
+    height: 12px;
+    margin-right: 5px;
+
+    transition: all .3s ease-in-out;
+
+    &_active {
+      fill-opacity: 1;
+
+      stroke: rgba(237, 73, 86, 1);
+      color: rgba(237, 73, 86, 1);
+    }
+  }
+
+  span {
+    line-height: 12px;
+    font-weight: 100;
+
+    transition: all .3s ease-in-out;
+  }
+
+  &:hover {
+    .like {
+      fill-opacity: 1;
+      stroke: rgba(237, 73, 86, 0.1);
+      color: rgba(237, 73, 86, .8);
     }
   }
 }

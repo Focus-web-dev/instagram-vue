@@ -2,20 +2,29 @@
   <div class="container">
     <section class="home">
       <aside class="home__left">
-        <div v-if="getFeedData.length" class="feed">
+        <div
+            v-if="getFeedData.length"
+            class="feed"
+        >
           <PostCard
               v-for="postData in getFeedData"
               :key="postData.postId"
               :postData="postData"
           />
         </div>
-        <h2 class="empty-feed" v-else>It's nothing to show. Try to follow someone</h2>
+        <h2 v-else>It's nothing to show. Try to follow someone</h2>
       </aside>
       <aside class="home__right">
         <div class="suggestions">
-          <router-link :to="`/profile/${getCurrentUserData.nickname}`" class="profile-link">
+          <router-link
+              :to="`/profile/${getCurrentUserData.nickname}`"
+              class="profile-link"
+          >
             <div class="profile-link__info">
-              <img :src="getCurrentUserData.avatar" alt="user-avatar">
+              <img
+                  :src="getCurrentUserData.avatar"
+                  alt="user-avatar"
+              >
               <p>{{ getCurrentUserData.nickname }}</p>
             </div>
             <button>
@@ -24,20 +33,25 @@
               </svg>
             </button>
           </router-link>
-
           <div class="suggestions__users">
             <div
                 v-for="user in getUsersData"
                 :key="user.id"
                 class="user"
             >
-              <router-link :to="`/profile/${user.nickname}`" class="user__info">
-                <img :src="user.avatar" alt="user-avatar">
+              <router-link
+                  :to="`/profile/${user.nickname}`"
+                  class="user__info"
+              >
+                <img
+                    :src="user.avatar"
+                    alt="user-avatar"
+                >
                 <p>{{ user.nickname }}</p>
               </router-link>
 
               <button
-                  @click="followHandler(user.nickname)"
+                  @click="followUser(user.nickname)"
                   :class="{'unfollow' : !checkFollow(user.nickname)}"
                   class="follow"
               >
@@ -54,28 +68,19 @@
 
 <script>
 import PostCard from "@/components/PostCard";
-
 import { mapGetters, mapActions, mapMutations } from 'vuex';
 
 export default {
   name: 'HomePage',
 
-  components: {
-    PostCard,
-  },
+  components: { PostCard },
 
   methods: {
     ...mapActions( ['fetchData'] ),
     ...mapMutations( ['followUser'] ),
 
     checkFollow( user ) {
-      return this.getCurrentUserData.follows.findIndex(el => {
-        return el === user
-      }) === -1;
-    },
-
-    followHandler( user ) {
-      this.followUser( user );
+      return this.getCurrentUserData.follows.findIndex(el => { return el === user }) === -1;
     },
   },
 

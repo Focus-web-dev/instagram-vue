@@ -2,8 +2,14 @@
   <div class="post">
 
     <div class="post__header">
-      <router-link :to="'/profile/' + postData.author" class="author">
-        <img :src="postData.avatar" alt="author">
+      <router-link
+          :to="'/profile/' + postData.author"
+          class="author"
+      >
+        <img
+            :src="postData.avatar"
+            alt="author"
+        >
         <p>{{ postData.author }}</p>
       </router-link>
 
@@ -12,7 +18,6 @@
 
     <swiper class="swiper"
         :class="{'swiper_hidden-pagination': postData.post.postImages.length < 2}"
-
         :modules="modules"
         :slides-per-view="1"
         :space-between="50"
@@ -24,7 +29,10 @@
           v-for="image in postData.post.postImages"
           :key="image"
       >
-        <img :src="image" alt="post">
+        <img
+            :src="image"
+            alt="post"
+        >
       </swiper-slide>
     </swiper>
 
@@ -98,8 +106,19 @@
             <router-link :to="'/profile/' + comment.commentAuthor">
               <span>{{ comment.commentAuthor }}:</span> {{ comment.commentText }}
             </router-link>
-            <button class="likes">
-              <svg class="like" width="14" height="12" aria-hidden="true" role="img">
+
+            <button
+                @click="commentLike(comment.commentId)"
+                class="likes"
+            >
+              <svg
+                  class="like"
+                  :class="{ 'like_active' : commentLikeCheck(comment.commentId) }"
+                  width="14"
+                  height="12"
+                  aria-hidden="true"
+                  role="img"
+              >
                 <use xlink:href="#like-icon"></use>
               </svg>
               <span>{{ comment.commentLikes.length.toString() }} likes</span>
@@ -134,7 +153,11 @@ export default {
   },
 
   methods: {
-    ...mapMutations( ['postLike', 'postSave'] ),
+    ...mapMutations( [
+        'postLike',
+        'postSave',
+        'commentLike'
+    ] ),
 
     likeCheck(post) {
       return post.postLikes.findIndex(el => { return el === this.getCurrentUserData.nickname; }) !== -1;
@@ -142,11 +165,24 @@ export default {
 
     saveCheck(postId) {
       return this.getCurrentUserData.savedPosts.findIndex(el => { return el === postId }) !== -1;
+    },
+
+    commentLikeCheck(commentId) {
+      let bool = true;
+
+      this.getAllPosts.forEach(post => {
+        post.post.postComments.forEach(comment => {
+          let currentUserIdx = comment.commentLikes.findIndex(idx => {return idx === this.getCurrentUserData.nickname});
+          if ((comment.commentId === commentId) && (currentUserIdx === -1)) bool = false;
+        })
+      })
+
+      return bool;
     }
   },
 
   computed: {
-    ...mapGetters( ['getCurrentUserData'] ),
+    ...mapGetters( ['getCurrentUserData', 'getAllPosts'] ),
   },
 
   setup() {

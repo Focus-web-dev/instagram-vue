@@ -4,6 +4,7 @@ export default {
             let users = [];
             let currentUser = {};
 
+            //database imitate
             if (localStorage.users) users = JSON.parse(localStorage.users);
             else {
                 users = [
@@ -131,6 +132,7 @@ export default {
 
             ctx.commit('updateUsers', users);
 
+            //still database imitating :)
             if (localStorage.currentUser) currentUser = JSON.parse(localStorage.currentUser);
             else {
                 currentUser = {
@@ -182,28 +184,19 @@ export default {
         },
 
         postLike( state, postId ) {
-            let userIdx;
-            let postIdx;
-
-            state.users.forEach((el, userIndex) => {
-                let idx = el.posts.findIndex(postEl => {
-                    return postEl.postId === postId;
-                });
-
-                if (idx !== -1) {
-                    userIdx = userIndex;
-                    postIdx = idx;
-                }
-            })
-
-            if (state.users[userIdx].posts[postIdx].postLikes.findIndex(el => { return el === state.currentUser.nickname }) === -1) {
-                state.users[userIdx].posts[postIdx].postLikes.push(state.currentUser.nickname);
-            }
-            else {
-                state.users[userIdx].posts[postIdx].postLikes.splice(
-                    state.users[userIdx].posts[postIdx].postLikes.findIndex(el => { return el === state.currentUser.nickname }), 1
-                );
-            }
+            state.users.forEach(user => {
+                user.posts.forEach(post => {
+                    if (post.postId === postId) {
+                        if (post.postLikes.findIndex(el => {return el === state.currentUser.nickname}) === -1) {
+                            post.postLikes.push(state.currentUser.nickname);
+                        } else {
+                            post.postLikes.splice(
+                                post.postLikes.findIndex(el => { return el === state.currentUser.nickname }), 1
+                            )
+                        }
+                    }
+                })
+            });
 
             localStorage.users = JSON.stringify(state.users);
         },
@@ -211,15 +204,14 @@ export default {
         postSave( state, postId ) {
             let savedPostIdx = state.currentUser.savedPosts.findIndex(el => {return el === postId});
 
-            if (savedPostIdx !== -1) {
-                state.currentUser.savedPosts.splice(savedPostIdx, 1);
-            } else state.currentUser.savedPosts.push(postId);
+            if (savedPostIdx !== -1) state.currentUser.savedPosts.splice(savedPostIdx, 1);
+            else state.currentUser.savedPosts.push(postId);
 
             localStorage.currentUser = JSON.stringify(state.currentUser);
         },
 
         followUser( state, user ) {
-            let aimUser = state.users[state.users.findIndex(el => {return el.nickname === user})];
+            let aimUser = state.users.find(el => {return el.nickname === user});
 
             if (aimUser.followers.findIndex(el => { return el === state.currentUser.nickname }) === -1) {
                 aimUser.followers.push(state.currentUser.nickname);
@@ -235,6 +227,45 @@ export default {
 
             localStorage.currentUser = JSON.stringify(state.currentUser);
             localStorage.users = JSON.stringify(state.users);
+        },
+
+        commentLike( state, commentId ) {
+            state.users.forEach(user => {
+                user.posts.forEach(post => {
+                    post.postComments.forEach(comment => {
+                        let currentUserIdx = comment.commentLikes.findIndex(idx => {return idx === state.currentUser.nickname});
+
+                        if ((comment.commentId === commentId) && (currentUserIdx === -1)) {
+                            comment.commentLikes.push(state.currentUser.nickname)
+                        } else if ((comment.commentId === commentId) && (currentUserIdx !== -1)) {
+                            comment.commentLikes.splice(currentUserIdx, 1);
+                        }
+                    })
+                })
+            })
+
+            localStorage.users = JSON.stringify(state.users);
+        },
+
+        addNewComment( state, newCommentObj ) {
+            let newDate = new Date();
+            let nowDate = ('0' + newDate.getDate()).slice(-2) + '/' + ('0' + (newDate.getMonth() + 1)).slice(-2);
+
+            let newComment = {
+                commentAuthor: state.currentUser.nickname,
+                commentDate: nowDate,
+                commentId: Date.now(),
+                commentLikes: [],
+                commentText: newCommentObj.commentText
+            }
+
+            state.users.forEach(user => {
+                user.posts.forEach(post => {
+                    if (post.postId === newCommentObj.postId) post.postComments.push(newComment);
+                })
+            })
+
+            localStorage.users = JSON.stringify(state.users)
         }
     },
     state: {
@@ -246,15 +277,19 @@ export default {
             return state.users;
         },
 
+        getCurrentUserData( state ) {
+            return state.currentUser;
+        },
+
         getFeedData( state ) {
             const feedData = [];
 
-            state.users.forEach(el => {
-                if (state.currentUser.follows.findIndex(userEl => {return userEl === el.nickname}) !== -1) {
-                    el.posts.forEach(post => {
+            state.users.forEach(user => {
+                if (state.currentUser.follows.findIndex(userIdx => {return userIdx === user.nickname}) !== -1) {
+                    user.posts.forEach(post => {
                         feedData.push ( {
-                            author: el.nickname,
-                            avatar: el.avatar,
+                            author: user.nickname,
+                            avatar: user.avatar,
                             post: post
                         } )
                     })
@@ -267,25 +302,17 @@ export default {
         getAllPosts( state ) {
             const allPosts = [];
 
-            state.users.forEach(el => {
-              el.posts.forEach(post => {
+            state.users.forEach(user => {
+              user.posts.forEach(post => {
                   allPosts.push({
-                      author: el.nickname,
-                      authorAvatar: el.avatar,
+                      author: user.nickname,
+                      authorAvatar: user.avatar,
                       post: post
                   });
               })
             })
 
             return allPosts;
-        },
-
-        getCurrentUserData( state ) {
-            return state.currentUser;
-        },
-
-        getAllUsers( state ) {
-            return state.users;
         }
     }
 }

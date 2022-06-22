@@ -11,7 +11,8 @@
     width: 60%;
 
     h2 {
-      font-size: 36px;
+      width: 100%;
+      font-size: 32px;
       font-weight: 700;
       text-align: center;
       color: @blackLowOpacity;
@@ -182,52 +183,6 @@
     }
   }
 
-  .bar {
-    padding: 0 25px;
-    transform: translateY(-30%);
-
-    &__item {
-      width: 24px;
-      height: 24px;
-
-      &:not(:last-child) {
-        margin-right: 15px;
-      }
-
-      svg {
-        color: @black;
-        fill-opacity: 0;
-
-        transition: all .3s ease-in-out;
-      }
-
-      &:hover {
-        svg {
-          fill-opacity: 1;
-        }
-
-        svg.like {
-          stroke: rgba(237, 73, 86, 0.1);
-          color: rgba(237, 73, 86, .8);
-        }
-      }
-
-      svg.like_active {
-        fill-opacity: 1;
-
-        stroke: rgba(237, 73, 86, 1);
-        color: rgba(237, 73, 86, 1);
-      }
-
-      svg.save_active {
-        fill-opacity: 1;
-
-        stroke: @black;
-        color: @black;
-      }
-    }
-  }
-
   &__footer {
     padding: 5px 25px 0;
 
@@ -276,9 +231,6 @@
       margin-top: 10px;
 
       &__item {
-        padding-bottom: 15px;
-        border-bottom: 1px solid @blackLowOpacity;
-
         font-size: 14px;
         font-weight: 300;
         color: @black;
@@ -304,50 +256,53 @@
             color: @hoverColor;
           }
         }
-
-        .likes {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-
-          margin-top: 10px;
-          margin-bottom: 0;
-
-          .like {
-            color: @black;
-            fill-opacity: 0;
-
-            width: 14px;
-            height: 12px;
-            margin-right: 5px;
-
-            transition: all .3s ease-in-out;
-
-            &_active {
-              fill-opacity: 1;
-
-              stroke: rgba(237, 73, 86, 1);
-              color: rgba(237, 73, 86, 1);
-            }
-          }
-
-          span {
-            line-height: 12px;
-            font-weight: 100;
-
-            transition: all .3s ease-in-out;
-          }
-
-          &:hover,
-          &:focus {
-            .like {
-              fill-opacity: 1;
-              stroke: rgba(237, 73, 86, 0.1);
-              color: rgba(237, 73, 86, .8);
-            }
-          }
-        }
       }
+    }
+  }
+}
+
+.bar {
+  padding: 0 25px;
+  transform: translateY(-30%);
+
+  &__item {
+    width: 24px;
+    height: 24px;
+
+    &:not(:last-child) {
+      margin-right: 15px;
+    }
+
+    svg {
+      color: @black;
+      fill-opacity: 0;
+
+      transition: all .3s ease-in-out;
+    }
+
+    &:hover {
+      svg {
+        fill-opacity: 1;
+      }
+
+      svg.like {
+        stroke: rgba(237, 73, 86, 0.1);
+        color: rgba(237, 73, 86, .8);
+      }
+    }
+
+    svg.like_active {
+      fill-opacity: 1;
+
+      stroke: rgba(237, 73, 86, 1);
+      color: rgba(237, 73, 86, 1);
+    }
+
+    svg.save_active {
+      fill-opacity: 1;
+
+      stroke: @black;
+      color: @black;
     }
   }
 }
