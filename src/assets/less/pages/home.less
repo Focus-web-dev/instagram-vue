@@ -93,6 +93,10 @@
           font-weight: 500;;
           color: #262626;
           transition: all 0.3s ease-in-out;
+
+          max-width: 85px;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
 
         &:hover,
@@ -131,6 +135,12 @@
 
         button {
           margin-top: 0;
+        }
+
+        &__info {
+          p {
+            max-width: 100px;
+          }
         }
       }
     }

@@ -9,35 +9,50 @@ export default {
             else {
                 currentUser = {
                     id: 0,
-                    nickname: "I_AM_USER",
+                    nickname: "i_am_a_dog",
                     avatar: "https://picsum.photos/id/237/200/320",
-                    name: "Cur name",
-                    description: "Current user",
+                    name: "Dog spike :)",
+                    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce velit lorem, consequat egestas dolor a, egestas vulputate erat. Vivamus sed semper diam. Suspendisse euismod, orci at faucibus sollicitudin, mi mauris eleifend orci, non aliquam lorem tortor sed lectus. Sed sit amet velit sed nisl viverra luctus.",
                     follows: [
-                        'user_1', 'user_2'
+                        'imagine_i_am_a_user_1', '._.user_2'
                     ],
                     followers: [
-                        'user_1', 'user_2'
+                        'imagine_i_am_a_user_1', '._.user_2'
                     ],
                     posts: [
                         {
                             postId: 1000,
-                            postImages: ["https://picsum.photos/id/237/200/321"],
-                            postDescription: "jsdoifasdfasdfadsf",
-                            postLikes: ['user_1', 'I_AM_USER'],
+                            postImages: ["https://picsum.photos/id/0/5616/3744", "hhttps://picsum.photos/id/1/5616/3744"],
+                            postDescription: "Just lorem ipsum.......................",
+                            postLikes: ['imagine_i_am_a_user_1', 'i_am_a_dog'],
                             postDate: "20/03",
                             postComments: [
                                 {
-                                    commentId: 2001,
-                                    commentText: "Hey!",
-                                    commentLikes: ['user_1', 'user_2'],
-                                    commentAuthor: "user_2",
+                                    commentId: 2000,
+                                    commentText: "Hey! Nice post!",
+                                    commentLikes: ['imagine_i_am_a_user_1'],
+                                    commentAuthor: '._.user_2',
                                     commentDate: "21/03"
-                                }
+                                },
+                                {
+                                    commentId: 2001,
+                                    commentText: "Fully agree with user_2 :)",
+                                    commentLikes: ['imagine_i_am_a_user_1', '._.user_2'],
+                                    commentAuthor: 'imagine_i_am_a_user_1',
+                                    commentDate: "22/03"
+                                },
                             ]
+                        },
+                        {
+                            postId: 1001,
+                            postImages: ["https://picsum.photos/id/1000/5626/3635", "https://picsum.photos/id/100/2500/1656", "https://picsum.photos/id/1003/1181/1772"],
+                            postDescription: "Just lorem ipsum.......................",
+                            postLikes: ['imagine_i_am_a_user_1', 'i_am_a_dog'],
+                            postDate: "20/03",
+                            postComments: []
                         }
                     ],
-                    savedPosts: [1001, 1003, 1005]
+                    savedPosts: [1002, 1005, 1007]
                 }
 
                 localStorage.currentUser = JSON.stringify(currentUser);
@@ -51,120 +66,133 @@ export default {
                 users = [
                     {
                         id: 1,
-                        nickname: "user_1",
-                        avatar: "https://picsum.photos/id/237/200/300",
-                        name: "Name1",
-                        description: "Just a user_1",
+                        nickname: "imagine_i_am_a_user_1",
+                        avatar: "https://picsum.photos/id/1005/5760/3840",
+                        name: "User_1, seriously??",
+                        description: "omg......",
                         follows: [
-                            'I_AM_USER', 'user_2'
+                            'i_am_a_dog', '._.user_2'
                         ],
                         followers: [
-                            'I_AM_USER', 'user_2'
-                        ],
-                        posts: [
-
-                        ]
-                    },
-                    {
-                        id: 2,
-                        nickname: "user_2",
-                        avatar: "https://picsum.photos/id/239/200/300",
-                        name: "Name2",
-                        description: "Just a user_2",
-                        follows: [
-                            'I_AM_USER', 'user_1'
-                        ],
-                        followers: [
-                            'I_AM_USER', 'user_1'
+                            'i_am_a_dog', '._.user_2'
                         ],
                         posts: [
                             {
-                                postId: 1001,
-                                postImages: ["https://picsum.photos/id/237/200/300", "https://picsum.photos/id/237/200/300", "https://picsum.photos/id/237/200/300"],
-                                postDescription: "DEF",
-                                postLikes: ['user_2', 'I_AM_USER'],
+                                postId: 1002,
+                                postImages: ["https://picsum.photos/id/101/2621/1747", "https://picsum.photos/id/1013/4256/2832", "https://picsum.photos/id/1014/6016/4000"],
+                                postDescription: "It's so difficult to fill all this data :(",
+                                postLikes: ['._.user_2', 'i_am_a_dog'],
                                 postDate: "20/03",
                                 postComments: [
                                     {
                                         commentId: 2002,
-                                        commentText: "Hey2!",
-                                        commentLikes: ['user_2', 'I_AM_USER'],
-                                        commentAuthor: "user_1",
+                                        commentText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce velit lorem, consequat egestas dolor a, egestas vulputate erat. Vivamus sed semper diam. Suspendisse euismod, orci at faucibus sollicitudin, mi mauris eleifend orci, non aliquam lorem tortor sed lectus. Sed sit amet velit sed nisl viverra luctus.",
+                                        commentLikes: ['._.user_2', 'i_am_a_dog'],
+                                        commentAuthor: "i_am_a_dog",
                                         commentDate: "23/03"
                                     },
                                     {
-                                        commentId: 2007,
-                                        commentText: "Hey7!",
-                                        commentLikes: ['user_2', 'I_AM_USER'],
-                                        commentAuthor: "user_2",
+                                        commentId: 2003,
+                                        commentText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce velit lorem, consequat egestas dolor a, egestas vulputate erat. Vivamus sed semper diam. Suspendisse euismod, orci at faucibus sollicitudin, mi mauris eleifend orci, non aliquam lorem tortor sed lectus. Sed sit amet velit sed nisl viverra luctus.",
+                                        commentLikes: ['._.user_2', 'i_am_a_dog'],
+                                        commentAuthor: '._.user_2',
                                         commentDate: "23/03"
                                     }
                                 ]
                             },
                             {
-                                postId: 1002,
-                                postImages: ["https://picsum.photos/id/237/200/300", "https://picsum.photos/id/237/200/300", "https://picsum.photos/id/237/200/300"],
-                                postDescription: "DEF",
-                                postLikes: ['user_1'],
+                                postId: 1006,
+                                postImages: ["https://picsum.photos/id/1014/6016/4000", "https://picsum.photos/id/1013/4256/2832", "https://picsum.photos/id/101/2621/1747"],
+                                postDescription: "It's so difficult to fill all this data :(",
+                                postLikes: ['._.user_2', 'i_am_a_dog'],
+                                postDate: "20/03",
+                                postComments: [
+                                    {
+                                        commentId: 2008,
+                                        commentText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce velit lorem, consequat egestas dolor a, egestas vulputate erat. Vivamus sed semper diam. Suspendisse euismod, orci at faucibus sollicitudin, mi mauris eleifend orci, non aliquam lorem tortor sed lectus. Sed sit amet velit sed nisl viverra luctus.",
+                                        commentLikes: ['._.user_2', 'i_am_a_dog'],
+                                        commentAuthor: "i_am_a_dog",
+                                        commentDate: "23/03"
+                                    },
+                                    {
+                                        commentId: 2009,
+                                        commentText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce velit lorem, consequat egestas dolor a, egestas vulputate erat. Vivamus sed semper diam. Suspendisse euismod, orci at faucibus sollicitudin, mi mauris eleifend orci, non aliquam lorem tortor sed lectus. Sed sit amet velit sed nisl viverra luctus.",
+                                        commentLikes: ['._.user_2', 'i_am_a_dog'],
+                                        commentAuthor: '._.user_2',
+                                        commentDate: "23/03"
+                                    }
+                                ]
+                            },
+                        ]
+                    },
+                    {
+                        id: 2,
+                        nickname: '._.user_2',
+                        avatar: "https://picsum.photos/id/239/200/300",
+                        name: "Name2",
+                        description: "Just a'._.user_2",
+                        follows: [
+                            'i_am_a_dog', 'imagine_i_am_a_user_1'
+                        ],
+                        followers: [
+                            'i_am_a_dog', 'imagine_i_am_a_user_1'
+                        ],
+                        posts: [
+                            {
+                                postId: 1003,
+                                postImages: ["https://picsum.photos/id/1020/4288/2848", "https://picsum.photos/id/1025/4951/3301", "https://picsum.photos/id/237/200/300"],
+                                postDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce velit lorem, consequat egestas dolor a, egestas vulputate erat. Vivamus sed semper diam. Suspendisse euismod, orci at faucibus sollicitudin, mi mauris eleifend orci, non aliquam lorem tortor sed lectus. Sed sit amet velit sed nisl viverra luctus.",
+                                postLikes: ['._.user_2', 'i_am_a_dog'],
                                 postDate: "20/03",
                                 postComments: [
                                     {
                                         commentId: 2004,
-                                        commentText: "Hey2!",
-                                        commentLikes: ['user_2', 'I_AM_USER'],
-                                        commentAuthor: "user_1",
+                                        commentText: "Lorem ipsum dolor sit amet",
+                                        commentLikes: ['imagine_i_am_a_user_1', 'i_am_a_dog'],
+                                        commentAuthor: "i_am_a_dog",
                                         commentDate: "23/03"
-                                    }
-                                ]
-                            },
-                            {
-                                postId: 1003,
-                                postImages: ["https://picsum.photos/id/237/200/300", "https://picsum.photos/id/237/200/300", "https://picsum.photos/id/237/200/300"],
-                                postDescription: "DEF",
-                                postLikes: [],
-                                postDate: "20/03",
-                                postComments: [
+                                    },
                                     {
                                         commentId: 2005,
-                                        commentText: "Hey2!",
-                                        commentLikes: ['I_AM_USER'],
-                                        commentAuthor: "user_1",
+                                        commentText: "Lorem ipsum dolor sit amet",
+                                        commentLikes: ['._.user_2', 'i_am_a_dog'],
+                                        commentAuthor: 'imagine_i_am_a_user_1',
                                         commentDate: "23/03"
                                     }
                                 ]
                             },
                             {
                                 postId: 1004,
-                                postImages: ["https://picsum.photos/id/237/200/300", "https://picsum.photos/id/237/200/300", "https://picsum.photos/id/237/200/300"],
+                                postImages: ["https://picsum.photos/id/1026/4621/3070", "https://picsum.photos/id/103/2592/1936", "https://picsum.photos/id/1031/5446/3063"],
                                 postDescription: "DEF",
-                                postLikes: [],
+                                postLikes: ["imagine_i_am_a_user_1"],
                                 postDate: "20/03",
                                 postComments: [
                                     {
                                         commentId: 2006,
-                                        commentText: "Hey2!",
-                                        commentLikes: ['user_2', 'I_AM_USER'],
-                                        commentAuthor: "user_1",
+                                        commentText: "Lorem ipsum dolor sit amet",
+                                        commentLikes: ['._.user_2', 'i_am_a_dog'],
+                                        commentAuthor: "imagine_i_am_a_user_1",
                                         commentDate: "23/03"
                                     }
                                 ]
                             },
                             {
                                 postId: 1005,
-                                postImages: ["https://picsum.photos/id/237/200/300", "https://picsum.photos/id/237/200/300", "https://picsum.photos/id/237/200/300"],
+                                postImages: ["https://picsum.photos/id/1032/2880/1800", "https://picsum.photos/id/1033/2048/1365", "https://picsum.photos/id/1035/5854/3903"],
                                 postDescription: "DEF",
                                 postLikes: [],
                                 postDate: "20/03",
                                 postComments: [
                                     {
-                                        commentId: 2003,
-                                        commentText: "Hey2!",
-                                        commentLikes: ['user_2', 'I_AM_USER'],
-                                        commentAuthor: "user_1",
+                                        commentId: 2007,
+                                        commentText: "Lorem ipsum dolor sit amet",
+                                        commentLikes: ['i_am_a_dog'],
+                                        commentAuthor: "imagine_i_am_a_user_1",
                                         commentDate: "23/03"
                                     }
                                 ]
-                            }
+                            },
                         ]
                     },
                 ]

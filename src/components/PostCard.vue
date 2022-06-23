@@ -17,13 +17,15 @@
     </div>
 
     <swiper class="swiper"
-        :class="{'swiper_hidden-pagination': postData.post.postImages.length < 2}"
-        :modules="modules"
-        :slides-per-view="1"
-        :space-between="50"
-        navigation
-        :pagination="{ clickable: true }"
-        keyboard
+
+            :class="{'swiper_hidden-pagination': postData.post.postImages.length < 2}"
+            :modules="modules"
+            :slides-per-view="1"
+            :space-between="50"
+            navigation
+            :pagination="{ clickable: true }"
+            :resizeObserver="true"
+            keyboard
     >
       <swiper-slide
           v-for="image in postData.post.postImages"

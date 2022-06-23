@@ -8,7 +8,7 @@
     align-items: flex-start;
 
     img {
-      width: 200px;
+      width: 200px !important;
       height: 200px;
       border-radius: 50%;
       object-fit: cover;
@@ -21,11 +21,13 @@
       justify-content: flex-start;
 
       margin-left: 50px;
+      max-width: calc(100% - 250px);
 
       &__nickname {
         display: flex;
         flex-direction: row;
         align-items: center;
+        flex-wrap: wrap;
 
         h3 {
           font-size: 24px;
@@ -39,6 +41,15 @@
           border-radius: 5px;
           font-size: 16px;
           transition: all .3s ease-in-out;
+        }
+
+        @media screen and (max-width: @breakpoint-sm) {
+          flex-direction: column;
+          align-items: flex-start;
+
+          button {
+            margin-top: 10px;
+          }
         }
       }
 
@@ -88,12 +99,13 @@
 
     @media screen and (max-width: @breakpoint-md) {
       img {
-        width: 125px;
+        width: 125px  !important;
         height: 125px;
       }
 
       .data {
         margin-left: 25px;
+        max-width: calc(100% - 150px);
 
         &__nickname {
           h3 {
@@ -137,12 +149,13 @@
 
     @media screen and (max-width: @breakpoint-sm) {
       img {
-        width: 90px;
+        width: 90px  !important;
         height: 90px;
       }
 
       .data {
         margin-left: 20px;
+        max-width: calc(100% - 110px);
 
         .info__item {
           font-size: 14px;
