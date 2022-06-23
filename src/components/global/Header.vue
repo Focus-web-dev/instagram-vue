@@ -1,11 +1,11 @@
 <template>
   <header class="header">
     <div class="container">
-      <div class="wrapper row">
+      <div class="wrapper">
 
         <router-link
             to="/"
-            class="header__logo col-4"
+            class="header__logo"
             aria-label="Go to homepage"
         >
           <svg width="132" height="60" aria-hidden="true" role="img">
@@ -13,7 +13,7 @@
           </svg>
         </router-link>
 
-        <nav class="header__menu col-8">
+        <nav class="header__menu">
           <ul class="menu">
             <li class="menu__item">
               <router-link

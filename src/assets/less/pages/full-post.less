@@ -58,6 +58,8 @@
         padding: 10px 25px;
         transform: unset;
 
+        background: @white;
+
         &__item {
           display: flex;
           flex-direction: row;
@@ -105,6 +107,61 @@
             background: @blackLowOpacity;
             color: @black;
           }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: @breakpoint-md) {
+    &__content {
+      .swiper {
+        .swiper-slide {
+          img {
+            min-height: 500px;
+            object-fit: cover;
+          }
+        }
+      }
+    }
+
+    &__data {
+      .comments {
+        max-height: 295px;
+      }
+    }
+  }
+
+  @media screen and (max-width: @breakpoint-sm) {
+    display: flex;
+    flex-direction: column;
+
+    width: 90%;
+    margin: 90px auto;
+
+    &__content {
+      width: 100%;
+      .swiper {
+        .swiper-slide {
+          img {
+            min-height: unset;
+            object-fit: cover;
+          }
+        }
+      }
+    }
+
+    &__data {
+      width: 100%;
+
+      .comments {
+        max-height: unset;
+        margin-bottom: 115px;
+        overflow-y: unset;
+      }
+
+      .comments-footer {
+        .form {
+          height: 50px;
         }
       }
     }
