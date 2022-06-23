@@ -14,9 +14,11 @@
   &__content {
     overflow-x: hidden;
     width: 50%;
+    min-height: 550px;
 
     .swiper {
       width: 100%;
+      height: 100%;
       margin: 0;
 
       .swiper-button-prev,
@@ -27,6 +29,13 @@
         * { background: @white; }
       }
 
+      .swiper-wrapper {
+        height: 100%;
+      }
+    }
+
+    @media screen and (max-width: @breakpoint-sm) {
+      min-height: unset;
     }
   }
 
@@ -44,10 +53,6 @@
     }
 
     .comments-footer {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-
       width: 100%;
 
       .bar {
@@ -155,7 +160,6 @@
 
       .comments {
         max-height: unset;
-        margin-bottom: 115px;
         overflow-y: unset;
       }
 
